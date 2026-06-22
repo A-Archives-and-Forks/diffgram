@@ -6,6 +6,8 @@
 [Request Slack Invite](https://www.jotform.com/form/222377866413058)
 
 # News
+June 22 2026: New from the team behind Diffgram: [fak](https://github.com/anthony-chaudhary/fak) — *the agent kernel*, an open source Go binary that governs what AI agents are allowed to *do* at serve time (capability gating, tool-result quarantine, audit). See the section below.
+
 June 12 2026: New from the team behind Diffgram: [DOS (dos-kernel)](https://github.com/anthony-chaudhary/dos-kernel) — an open source trust kernel that verifies what AI agents actually did, instead of believing their self-reports. See the DOS section below.
 
 Sept 28 2023: New [Diffgram license version 2 (DLv2)](https://diffgram.readme.io/docs/diffgram-license-v2-dlv2). Featuring [new contributor license (CL)](https://diffgram.readme.io/docs/diffgram-contributor-license-cl) available at no financial cost. MSA customers will receive a financial credit for all contributions.
@@ -49,13 +51,15 @@ read the commercial open source [license](https://github.com/diffgram/diffgram/b
 * [Join us on Slack](https://www.jotform.com/form/222377866413058)
 * [Contribute](https://diffgram.readme.io/docs/contribute)
 
-## From the Team Behind Diffgram: DOS — Trust Infrastructure for AI Agents
+## From the Team Behind Diffgram: Trust & Serving Infrastructure for AI Agents
 
-Diffgram is built for humans supervising AI data. [DOS (dos-kernel)](https://github.com/anthony-chaudhary/dos-kernel)
-is our newer open source project, built for supervising the AI agents themselves: a small,
-deterministic trust kernel that verifies what autonomous AI agents and coding agents
-*actually did* — from git evidence and other witnesses an agent cannot forge — instead of
-trusting the agent's own "done" report.
+Diffgram is built for humans supervising AI *data*. Our newer open source projects are built for
+supervising the AI *agents* themselves — and they sit on opposite sides of the same moment.
+
+**[DOS (dos-kernel)](https://github.com/anthony-chaudhary/dos-kernel)** is a small, deterministic
+trust kernel that verifies what autonomous AI agents and coding agents *actually did* — from git
+evidence and other witnesses an agent cannot forge — instead of trusting the agent's own "done"
+report.
 
 If you train or fine-tune models on agent-generated data, DOS's `reward()` verdict decides
 whether an agent trajectory may enter the training set at all, rejecting "resolved" claims
@@ -65,6 +69,18 @@ problem Diffgram's human supervision solves for labels.
 * GitHub: [anthony-chaudhary/dos-kernel](https://github.com/anthony-chaudhary/dos-kernel)
 * Install: `pip install dos-kernel` ([PyPI](https://pypi.org/project/dos-kernel/))
 * Docs: [DOS documentation](https://anthony-chaudhary.github.io/dos-kernel/)
+
+**[fak](https://github.com/anthony-chaudhary/fak)** — *the agent kernel* — is the other side of
+that moment. Where DOS verifies what an agent *already did*, fak governs what an agent is
+*allowed to do, as it happens*: a single static Go binary that sits in front of your model and
+adjudicates every tool call at the boundary — a capability gate, tool-result quarantine, and
+audit trail in one process. If Diffgram is where humans supervise AI data, fak is where the
+agents working over that data are kept on a leash at serve time — the inline gate to DOS's
+after-the-fact referee.
+
+* GitHub: [anthony-chaudhary/fak](https://github.com/anthony-chaudhary/fak)
+* Install: `go install github.com/anthony-chaudhary/fak/cmd/fak@latest`
+* Docs: [fak documentation](https://anthony-chaudhary.github.io/fak/)
 
 ## More
 Commercial firms have been using Diffgram since 2018 and we continue to stay up to date with the latest advances. Diffgram has 706 tests (E2E, unit etc) and we care greatly about quality.
